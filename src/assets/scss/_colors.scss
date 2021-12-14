@@ -1,0 +1,208 @@
+// Put all color defination here, so they could be shared by all components.
+
+$color: #262828;
+$hiretualColor: #1f8ceb;
+$hiretualColorDark: #1064ae;
+$lightGrey: #e8e8e8;
+$tableText: rgba(0, 0, 0, 0.6);
+$secondaryText: rgba(0, 0, 0, 0.8);
+$greyPalette: #6c757d;
+$darkGrey: #737478;
+$lightGreyColor: rgba(0, 0, 0, 0.15);
+$floaterColor: #2f2f30;
+$lightGreyColor2: #f2f2f2;
+$lightGreyColor3: #e6e6e8;
+$greyColor: #cccccc;
+$background: #f3f4f3;
+$placeholderColor: #aaa;
+$whiteColor: #ffffff;
+$DDDColor: #dddddd;
+$goldenColor: #da7908;
+$errorColor: #d95555;
+$successColor: #28a745;
+$warningColor: #ffc107;
+$lightSuccessColor: #c0efaf;
+$bodyColor: #f2f2f2;
+$hoverColor: #d8dee2;
+$candidateTagBorderColor: #eaf4fd;
+$textGoldColor: #df7401;
+$lightBlue: #eaf4fd;
+$lightYellow: rgba(255, 204, 0, 0.05);
+$yellowTagColor: #fcf2cd;
+$orangeColor: #e3644d;
+$CyanColor: #17a2b8;
+
+$linkedInColor: #0077b5;
+$githubColor: #333;
+$googleColor: #d62d20;
+$googleColorBlue: #4285f4;
+$twitterColor: #1da1f2;
+$facebookColor: #3b5998;
+$angellistColor: #455b65;
+$stackoverflowColor: #f48024;
+$flickrColor: #0063dc;
+$pinterestColor: #bd081c;
+$instgramColor: #405de6;
+$peach: #ffcc99;
+
+.body-color {
+  color: $bodyColor;
+}
+.linkedin-color {
+  color: $linkedInColor;
+}
+.github-color {
+  color: $githubColor;
+}
+.google-color {
+  color: $googleColor;
+}
+.google-color-blue {
+  color: $googleColorBlue;
+}
+.twitter-color {
+  color: $twitterColor;
+}
+.facebook-color {
+  color: $facebookColor;
+}
+.angellist-color {
+  color: $angellistColor;
+}
+.stackoverflow-color {
+  color: $stackoverflowColor;
+}
+.flickr-color {
+  color: $flickrColor;
+}
+.pinterest-color {
+  color: $pinterestColor;
+}
+.instgram-color {
+  color: $instgramColor;
+}
+.redColor {
+  color: $errorColor;
+}
+.orangeColor {
+  color: $warningColor;
+}
+.goldColor {
+  color: $goldenColor;
+}
+.greenColor {
+  color: $successColor;
+}
+.lightGreenColor {
+  color: $lightSuccessColor;
+}
+.hiretualColor {
+  color: $hiretualColor;
+}
+.bg-color-hiretual {
+  background-color: $hiretualColor !important;
+}
+.bg-color-hiretual-dark {
+  background-color: $hiretualColorDark;
+}
+.bg-color-white {
+  background-color: $whiteColor;
+}
+.bg-corlor-grey {
+  background-color: $bodyColor;
+}
+.h-text-gold {
+  color: $textGoldColor;
+}
+.h-bg-body-color {
+  background-color: $bodyColor;
+}
+.h-bg-hiretual-color {
+  background-color: $hiretualColor !important;
+}
+.h-text-lightblue-color {
+  color: $lightBlue;
+}
+.h-bg-lightblue {
+  background-color: $lightBlue;
+}
+.h-bg-lightyellow {
+  background-color: $lightYellow;
+}
+.h-text-light-gray {
+  color: $placeholderColor;
+}
+
+.h-text-light-gray-with-hoover {
+  color: $placeholderColor;
+
+  &:hover {
+    color: $placeholderColor;
+  }
+}
+
+.bg-f9f9f9 {
+  background-color: #f9f9f9;
+}
+
+.text-hiretual-dark {
+  color: $hiretualColorDark;
+}
+
+.editor__toolbar--gray {
+  color: #595959;
+}
+
+.bg-peach {
+  background-color: #ffcc99;
+}
+
+.text-lightgrey {
+  color: #b5b5b5;
+}
+
+.text-lightgray {
+  color: lightgray;
+}
+
+.hover-blue {
+  &:hover {
+    color: $hiretualColor;
+  }
+}
+
+.text-orange {
+  color: $orangeColor;
+}
+
+.text-muted {
+  color: $greyPalette !important;
+}
+
+.text-black {
+  color: black !important;
+}
+
+.text-darkMuted {
+  color: $darkGrey !important;
+}
+
+.text-cyan {
+  color: $CyanColor;
+}
+
+.text-blue {
+  color: $hiretualColor;
+}
+
+.text-shadow-grey {
+  color: $lightGreyColor3;
+}
+
+.text-nav-not-selected {
+  color:#ffffff;
+}
+
+.text-nav-selected {
+  color: #999999;
+}
