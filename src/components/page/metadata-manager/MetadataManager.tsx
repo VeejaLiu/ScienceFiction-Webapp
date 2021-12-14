@@ -4,7 +4,7 @@ import Book from './Book';
 import NavBarSecond, { NavBarSecondItem } from '../../common/NavBarSecond';
 import Author from './Author';
 import Category from './Category';
-import AllUser from './AllUser';
+import UserPage from './UserPage';
 
 function MetadataManager() {
   const match = useRouteMatch();
@@ -23,7 +23,7 @@ function MetadataManager() {
         <NavBarSecondItem router="book" title="书籍" />
         <NavBarSecondItem router="author" title="作者" />
         <NavBarSecondItem router="category" title="系列" />
-        <NavBarSecondItem router="allUser" title="用户" />
+        <NavBarSecondItem router="user-page" title="用户" />
       </NavBarSecond>
       <div
         style={{
@@ -36,7 +36,7 @@ function MetadataManager() {
           <Route path={`${match.path}/book`} component={Book} />
           <Route path={`${match.path}/author`} component={Author} />
           <Route path={`${match.path}/category`} component={Category} />
-          <Route path={`${match.path}/allUser`} component={AllUser} />
+          <Route path={`${match.path}/user-page`} component={UserPage} />
           <Redirect to={`${match.path}/book`} />
         </Switch>
       </div>
