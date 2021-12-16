@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import { HeaderBar } from './components/common';
 import 'react-toastify/dist/ReactToastify.css';
 import './assets/scss/bmc-main.scss';
+import 'antd/dist/antd.min.css';
 
 const MetadataManager = React.lazy(
   () => import('./components/page/metadata-manager/MetadataManager'),
@@ -25,7 +26,7 @@ function AdminSite() {
         className="ToastContainer--container"
       />
       <Helmet>
-        <title>科幻小说</title>
+        <title>Test</title>
       </Helmet>
     </Suspense>
   );
