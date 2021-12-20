@@ -1,10 +1,11 @@
 import React from 'react';
 import { Redirect, Route, useRouteMatch, Switch } from 'react-router-dom';
-import Book from './Book';
+import BookPage from './BookPage';
 import NavBarSecond, { NavBarSecondItem } from '../../common/NavBarSecond';
-import Author from './Author';
+import AuthorPage from './AuthorPage';
 import Category from './Category';
 import UserPage from './UserPage';
+import BookUploadPage from './BookUploadPage';
 
 function MetadataManager() {
   const match = useRouteMatch();
@@ -20,10 +21,11 @@ function MetadataManager() {
       }}
     >
       <NavBarSecond>
-        <NavBarSecondItem router="book" title="书籍" />
+        <NavBarSecondItem router="book-page" title="书籍" />
         <NavBarSecondItem router="author" title="作者" />
         <NavBarSecondItem router="category" title="系列" />
         <NavBarSecondItem router="user-page" title="用户" />
+        <NavBarSecondItem router="user-upload-page" title="书籍上传" />
       </NavBarSecond>
       <div
         style={{
@@ -33,10 +35,11 @@ function MetadataManager() {
         }}
       >
         <Switch>
-          <Route path={`${match.path}/book`} component={Book} />
-          <Route path={`${match.path}/author`} component={Author} />
+          <Route path={`${match.path}/book-page`} component={BookPage} />
+          <Route path={`${match.path}/author`} component={AuthorPage} />
           <Route path={`${match.path}/category`} component={Category} />
           <Route path={`${match.path}/user-page`} component={UserPage} />
+          <Route path={`${match.path}/user-upload-page`} component={BookUploadPage} />
           <Redirect to={`${match.path}/book`} />
         </Switch>
       </div>

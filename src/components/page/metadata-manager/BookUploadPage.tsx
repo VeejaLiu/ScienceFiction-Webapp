@@ -1,9 +1,9 @@
 import React from 'react';
-import { uploadBook } from '../../../http/book/book';
-import { Form, Button, Upload, Input, FormInstance } from 'antd';
+import { Button, Form, FormInstance, Input, Upload } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
+import { uploadBook } from '../../../http/book/book';
 
-function Book() {
+function BookUploadPage() {
   const formItemLayout = {
     labelCol: { span: 6 },
     wrapperCol: { span: 14 },
@@ -13,8 +13,6 @@ function Book() {
 
   const formData = new FormData();
   const normFile = (e: any) => {
-    console.log('process.env.BACKEND_SERVER_URL:', process.env.BACKEND_SERVER_URL);
-
     if (!form.current?.getFieldValue('book_name')) {
       const result = e.file?.name;
       form.current?.setFieldsValue({ book_name: result.replace('.txt', '') });
@@ -34,7 +32,6 @@ function Book() {
 
   return (
     <div>
-      <div style={{ margin: '5px', padding: '5px', border: '1px solid #ccc' }}>书籍查看</div>
       <div style={{ margin: '5px', padding: '5px', border: '1px solid #ccc' }}>
         <Form
           name="validate_other"
@@ -87,4 +84,4 @@ function Book() {
   );
 }
 
-export default Book;
+export default BookUploadPage;

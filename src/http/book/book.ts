@@ -1,13 +1,24 @@
 import { basicUrl, HttpService } from '../../services';
+import { Book } from '../../types/book';
 
-const userBasicUrl = `${basicUrl}/book`;
+const bookBasicUrl = `${basicUrl}/book`;
 
 export async function uploadBook(e: FormData): Promise<any> {
   try {
-    const response = await HttpService.post(`${userBasicUrl}/uploadBook`, e);
+    const response = await HttpService.post(`${bookBasicUrl}/uploadBook`, e);
     return response.data;
   } catch (e) {
     console.error(e);
     return 'failed';
+  }
+}
+
+export async function getAllBook(): Promise<Book[]> {
+  try {
+    const response = await HttpService.get(`${bookBasicUrl}/getAllBook`);
+    return response.data;
+  } catch (e) {
+    console.error(e);
+    return [];
   }
 }
