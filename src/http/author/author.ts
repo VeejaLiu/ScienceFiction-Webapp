@@ -12,3 +12,13 @@ export async function getAllAuthor(): Promise<Author[]> {
     return [];
   }
 }
+
+export async function updateAuthor(author: Author | undefined): Promise<any> {
+  try {
+    const response = await HttpService.post(`${authorBasicUrl}/updateAuthor`, author);
+    return response.data;
+  } catch (e) {
+    console.error(e);
+    return [];
+  }
+}

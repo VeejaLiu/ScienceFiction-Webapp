@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Author } from '../../../types/author';
-import { getAllAuthor } from '../../../http/author/author';
-import { Modal, Table } from 'antd';
+import { getAllAuthor, updateAuthor } from '../../../http/author/author';
+import { Form, Input, Modal, Table } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
 
 function AuthorPage() {
@@ -18,10 +18,12 @@ function AuthorPage() {
 
   const handleOk = () => {
     setConfirmLoading(true);
-    setTimeout(() => {
-      setVisible(false);
-      setConfirmLoading(false);
-    }, 2000);
+    updateAuthor(editingAuthor).then((result) => {
+      if (result === 'success') {
+        setVisible(false);
+        setConfirmLoading(false);
+      }
+    });
   };
 
   const handleCancel = () => {
@@ -39,32 +41,39 @@ function AuthorPage() {
 
   const columns = [
     {
+      key: 'id',
       title: 'ID',
       dataIndex: 'id',
     },
     {
+      key: 'id',
       title: '名字',
       dataIndex: 'authorFirstName',
     },
     {
+      key: 'id',
       title: '姓氏',
       dataIndex: 'authorLastName',
     },
     {
+      key: 'id',
       title: '信息',
       dataIndex: 'authorInformations',
     },
     {
+      key: 'id',
       title: '国籍',
       dataIndex: 'authorNation',
     },
     {
+      key: 'id',
       title: '操作',
-      render: () => (
+      render: (text: any, record: Author, index: any) => (
         <EditOutlined
           onClick={() => {
+            setEditingAuthor(record);
             showModal();
-            console.log('author:');
+            console.log('editingAuthor: ', editingAuthor);
           }}
         />
       ),
@@ -89,12 +98,74 @@ function AuthorPage() {
         title="修改作者信息"
         visible={visible}
         onOk={handleOk}
+        cancelText={'取消'}
+        okText={'确认'}
         confirmLoading={confirmLoading}
         onCancel={handleCancel}
       >
-        作者信息：
+        <Form name="basic" labelCol={{ span: 8 }} wrapperCol={{ span: 16 }} autoComplete="off">
+          <Form.Item
+            label="作者名字/全名"
+            name="firstName"
+            rules={[
+              { required: true, message: '请输入作者的 名字 / 全名 / First Name / Full Name' },
+            ]}
+          >
+            <Input
+              defaultValue={editingAuthor?.authorFirstName}
+              onChange={(event) => {
+                const newAuthor: any = { ...editingAuthor };
+                newAuthor.authorFirstName = event.target.value;
+                setEditingAuthor(newAuthor);
+              }}
+            />
+          </Form.Item>
+          <Form.Item
+            label="作者姓氏"
+            name="lastName"
+            rules={[{ message: '作者的 姓氏 / Last Name' }]}
+          >
+            <Input
+              defaultValue={editingAuthor?.authorLastName || ''}
+              onChange={(event) => {
+                const newAuthor: any = { ...editingAuthor };
+                newAuthor.authorLastName = event.target.value;
+                setEditingAuthor(newAuthor);
+              }}
+            />
+          </Form.Item>
+          <Form.Item label="作者信息" name="information" rules={[{ message: '作者的简介/信息' }]}>
+            <Input
+              defaultValue={editingAuthor?.authorInformations || ''}
+              onChange={(event) => {
+                const newAuthor: any = { ...editingAuthor };
+                newAuthor.authorInformations = event.target.value;
+                setEditingAuthor(newAuthor);
+              }}
+            />
+          </Form.Item>
+          <Form.Item label="作者国籍" name="nation" rules={[{ message: '作者的国籍' }]}>
+            <Input
+              defaultValue={editingAuthor?.authorNation || ''}
+              onChange={(event) => {
+                const newAuthor: any = { ...editingAuthor };
+                newAuthor.authorNation = event.target.value;
+                setEditingAuthor(newAuthor);
+              }}
+            />
+          </Form.Item>
+        </Form>
       </Modal>
-      editingAuthor: {editingAuthor}
+      editingAuthor.id: {editingAuthor?.id}
+      <br />
+      editingAuthor.authorFirstName: {editingAuthor?.authorFirstName}
+      <br />
+      editingAuthor.authorLastName: {editingAuthor?.authorLastName}
+      <br />
+      editingAuthor.authorInformations: {editingAuthor?.authorInformations}
+      <br />
+      editingAuthor.authorNation: {editingAuthor?.authorNation}
+      <br />
     </div>
   );
 }
