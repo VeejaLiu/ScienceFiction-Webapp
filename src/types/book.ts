@@ -6,4 +6,7 @@ export interface Book {
   bookTags: string;
   bookImages: string;
   bookFilePath: string;
+  is_delete?: string;
+  create_date?: Date;
+  update_date?: Date;
 }
