@@ -33,13 +33,10 @@ function CategoryPage() {
         style={{
           margin: '5px',
           padding: '5px 5px 200px 5px',
-          border: '1px solid #ccc',
         }}
       >
-        <div className="text-center">
-          <h4>所有系列列表</h4>
-          <Table columns={columns} dataSource={categories} rowKey="id" />
-        </div>
+        <h4 className="text-center">所有系列列表</h4>
+        <Table columns={columns} dataSource={categories} rowKey="id" />
       </div>
     </div>
   );

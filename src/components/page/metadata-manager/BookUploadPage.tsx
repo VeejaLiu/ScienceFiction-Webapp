@@ -32,14 +32,8 @@ function BookUploadPage() {
 
   return (
     <div>
-      <div style={{ margin: '5px', padding: '5px', border: '1px solid #ccc' }}>
-        <Form
-          name="validate_other"
-          ref={form}
-          {...formItemLayout}
-          onFinish={onFinish}
-          encType={'multipart/form-data'}
-        >
+      <div style={{ margin: '5px', padding: '5px' }}>
+        <Form ref={form} {...formItemLayout} onFinish={onFinish} encType={'multipart/form-data'}>
           <Form.Item
             label="书籍名称"
             name="book_name"

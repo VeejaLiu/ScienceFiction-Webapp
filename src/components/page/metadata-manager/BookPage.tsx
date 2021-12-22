@@ -53,13 +53,10 @@ function BookPage() {
         style={{
           margin: '5px',
           padding: '5px 5px 200px 5px',
-          border: '1px solid #ccc',
         }}
       >
-        <div className="text-center">
-          <h4>所有书籍列表</h4>
-          <Table columns={columns} dataSource={books} rowKey="id" />
-        </div>
+        <h4 className="text-center">所有书籍列表</h4>
+        <Table columns={columns} dataSource={books} rowKey="id" />
       </div>
     </div>
   );

@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Author } from '../../../types/author';
 import { getAllAuthor, updateAuthor } from '../../../http/author/author';
-import { Form, Input, Modal, Table } from 'antd';
+import { Form, FormInstance, Input, Modal, Table } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
 
 function AuthorPage() {
   const [authors, setAuthors] = useState<Author[]>([]);
 
   const [editingAuthor, setEditingAuthor] = useState<Author>();
+
+  const form = React.createRef<FormInstance>();
 
   const [visible, setVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
@@ -27,7 +29,6 @@ function AuthorPage() {
   };
 
   const handleCancel = () => {
-    console.log('Clicked cancel button');
     setVisible(false);
   };
 
@@ -71,9 +72,10 @@ function AuthorPage() {
       render: (text: any, record: Author, index: any) => (
         <EditOutlined
           onClick={() => {
-            setEditingAuthor(record);
+            console.log('record: ', record);
+            setEditingAuthor({ ...record });
+            form.current?.setFieldsValue({ ...record });
             showModal();
-            console.log('editingAuthor: ', editingAuthor);
           }}
         />
       ),
@@ -86,13 +88,10 @@ function AuthorPage() {
         style={{
           margin: '5px',
           padding: '5px 5px 200px 5px',
-          border: '1px solid #ccc',
         }}
       >
-        <div className="text-center">
-          <h4>所有作者列表</h4>
-          <Table columns={columns} dataSource={authors} rowKey="id" />
-        </div>
+        <h4 className="text-center">所有作者列表</h4>
+        <Table columns={columns} dataSource={authors} rowKey="id" />
       </div>
       <Modal
         title="修改作者信息"
@@ -103,16 +102,23 @@ function AuthorPage() {
         confirmLoading={confirmLoading}
         onCancel={handleCancel}
       >
-        <Form name="basic" labelCol={{ span: 8 }} wrapperCol={{ span: 16 }} autoComplete="off">
+        <Form
+          name="basic"
+          ref={form}
+          labelCol={{ span: 8 }}
+          wrapperCol={{ span: 16 }}
+          autoComplete="off"
+        >
           <Form.Item
             label="作者名字/全名"
-            name="firstName"
+            name="authorFirstName"
             rules={[
               { required: true, message: '请输入作者的 名字 / 全名 / First Name / Full Name' },
             ]}
           >
             <Input
-              defaultValue={editingAuthor?.authorFirstName}
+              // defaultValue={editingAuthor?.authorFirstName}
+              // value={editingAuthor?.authorFirstName}
               onChange={(event) => {
                 const newAuthor: any = { ...editingAuthor };
                 newAuthor.authorFirstName = event.target.value;
@@ -122,11 +128,11 @@ function AuthorPage() {
           </Form.Item>
           <Form.Item
             label="作者姓氏"
-            name="lastName"
+            name="authorLastName"
             rules={[{ message: '作者的 姓氏 / Last Name' }]}
           >
             <Input
-              defaultValue={editingAuthor?.authorLastName || ''}
+              // defaultValue={editingAuthor?.authorLastName || ''}
               onChange={(event) => {
                 const newAuthor: any = { ...editingAuthor };
                 newAuthor.authorLastName = event.target.value;
@@ -134,9 +140,13 @@ function AuthorPage() {
               }}
             />
           </Form.Item>
-          <Form.Item label="作者信息" name="information" rules={[{ message: '作者的简介/信息' }]}>
+          <Form.Item
+            label="作者信息"
+            name="authorInformations"
+            rules={[{ message: '作者的简介/信息' }]}
+          >
             <Input
-              defaultValue={editingAuthor?.authorInformations || ''}
+              // defaultValue={editingAuthor?.authorInformations || ''}
               onChange={(event) => {
                 const newAuthor: any = { ...editingAuthor };
                 newAuthor.authorInformations = event.target.value;
@@ -144,9 +154,9 @@ function AuthorPage() {
               }}
             />
           </Form.Item>
-          <Form.Item label="作者国籍" name="nation" rules={[{ message: '作者的国籍' }]}>
+          <Form.Item label="作者国籍" name="authorNation" rules={[{ message: '作者的国籍' }]}>
             <Input
-              defaultValue={editingAuthor?.authorNation || ''}
+              // defaultValue={editingAuthor?.authorNation || ''}
               onChange={(event) => {
                 const newAuthor: any = { ...editingAuthor };
                 newAuthor.authorNation = event.target.value;
@@ -166,6 +176,7 @@ function AuthorPage() {
       <br />
       editingAuthor.authorNation: {editingAuthor?.authorNation}
       <br />
+      form.current?.getFieldsValue(): {form.current?.getFieldValue('authorNation')}
     </div>
   );
 }
