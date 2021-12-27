@@ -38,7 +38,7 @@ function AuthorPage() {
   };
 
   useEffect(() => {
-    doGetAllAuthor();
+    doGetAllAuthor().then();
   }, []);
 
   const columns = [
@@ -70,7 +70,7 @@ function AuthorPage() {
     {
       key: 'id',
       title: '操作',
-      render: (text: any, record: Author, index: any) => (
+      render: (text: any, record: Author) => (
         <EditOutlined
           onClick={() => {
             setEditingAuthor({ ...record });
