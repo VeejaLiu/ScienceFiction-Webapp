@@ -5,7 +5,6 @@ import NavBarSecond, { NavBarSecondItem } from '../../common/NavBarSecond';
 import AuthorPage from './AuthorPage';
 import CategoryPage from './CategoryPage';
 import UserPage from './UserPage';
-import BookUploadPage from './BookUploadPage';
 import FilePage from './FilePage';
 
 function MetadataManager() {
@@ -27,7 +26,6 @@ function MetadataManager() {
         <NavBarSecondItem router="category-page" title="系列" />
         <NavBarSecondItem router="file-page" title="文件" />
         <NavBarSecondItem router="user-page" title="用户" />
-        <NavBarSecondItem router="user-upload-page" title="书籍上传" />
       </NavBarSecond>
       <div
         style={{
@@ -42,8 +40,7 @@ function MetadataManager() {
           <Route path={`${match.path}/category-page`} component={CategoryPage} />
           <Route path={`${match.path}/file-page`} component={FilePage} />
           <Route path={`${match.path}/user-page`} component={UserPage} />
-          <Route path={`${match.path}/user-upload-page`} component={BookUploadPage} />
-          <Redirect to={`${match.path}/book`} />
+          <Redirect to={`${match.path}/book-page`} />
         </Switch>
       </div>
     </div>

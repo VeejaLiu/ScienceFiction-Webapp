@@ -10,14 +10,16 @@ import 'antd/dist/antd.min.css';
 const MetadataManager = React.lazy(
   () => import('./components/page/metadata-manager/MetadataManager'),
 );
+const BookUpload = React.lazy(() => import('./components/page/book-upload/BookUpload'));
 function AdminSite() {
   return (
     <Suspense fallback={null}>
       <Router>
         <HeaderBar />
         <Switch>
+          <Route path="/book-upload" component={BookUpload} />
           <Route path="/metadata-manager" component={MetadataManager} />
-          <Redirect to="/metadata-manager" />
+          <Redirect to="/book-upload" />
         </Switch>
       </Router>
       <ToastContainer

@@ -55,7 +55,10 @@ function Header() {
       <NavbarToggler onClick={() => setIsOpen(!isOpen)} />
       <Collapse isOpen={isOpen} navbar>
         <Nav className="mr-auto" navbar>
-          <Link to="/ask" className={getHeaderClasses('/ask')}>
+          <Link to="/book-upload" className={getHeaderClasses('/book-upload')}>
+            书籍上传
+          </Link>
+          <Link to="/metadata-manager" className={getHeaderClasses('/metadata-manager')}>
             元数据管理
           </Link>
         </Nav>

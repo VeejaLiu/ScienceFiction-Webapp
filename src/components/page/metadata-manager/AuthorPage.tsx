@@ -18,14 +18,19 @@ function AuthorPage() {
     setVisible(true);
   };
 
-  const handleOk = () => {
+  const doGetAllAuthor = async () => {
+    const data = await getAllAuthor();
+    setAuthors(data);
+  };
+
+  const handleOk = async () => {
     setConfirmLoading(true);
-    updateAuthor(editingAuthor).then((result) => {
-      if (result === 'success') {
-        setVisible(false);
-        setConfirmLoading(false);
-      }
-    });
+    const result = await updateAuthor(editingAuthor);
+    if (result === 'success') {
+      setVisible(false);
+      setConfirmLoading(false);
+      await doGetAllAuthor();
+    }
   };
 
   const handleCancel = () => {
@@ -33,10 +38,6 @@ function AuthorPage() {
   };
 
   useEffect(() => {
-    const doGetAllAuthor = async () => {
-      const data = await getAllAuthor();
-      setAuthors(data);
-    };
     doGetAllAuthor();
   }, []);
 
