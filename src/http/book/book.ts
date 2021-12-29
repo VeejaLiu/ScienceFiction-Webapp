@@ -22,3 +22,13 @@ export async function getAllBook(): Promise<Book[]> {
     return [];
   }
 }
+
+export async function downloadBook(id: number): Promise<Book[]> {
+  try {
+    const response = await HttpService.get(`${bookBasicUrl}/downloadBookByID?id=${id}`);
+    return response.data;
+  } catch (e) {
+    console.error(e);
+    return [];
+  }
+}

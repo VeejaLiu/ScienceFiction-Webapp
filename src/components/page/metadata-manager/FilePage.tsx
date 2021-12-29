@@ -45,7 +45,6 @@ function FilePage() {
           padding: '5px 5px 200px 5px',
         }}
       >
-        <h4 className="text-center">所有文件列表</h4>
         <Table columns={columns} dataSource={categories} rowKey="id" />
       </div>
     </div>

@@ -1,10 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { getAllBook } from '../../../http/book/book';
+import { downloadBook, getAllBook } from '../../../http/book/book';
 import { Book } from '../../../types/book';
 import { Table } from 'antd';
+import { DownloadOutlined } from '@ant-design/icons';
 
 function BookPage() {
   const [books, setBooks] = useState<Book[]>([]);
+
+  const doDownloadBook = async (id: number): Promise<any> => {
+    return await downloadBook(id);
+  };
+
+  const openDownloadDialog = (url: any, fileName: any) => {
+    if (typeof url === 'object' && url instanceof Blob) {
+      url = URL.createObjectURL(url); // 创建blob地址
+    }
+    const aLink = document.createElement('a');
+    aLink.href = url;
+    aLink.download = fileName;
+    aLink.click();
+  };
 
   useEffect(() => {
     const doGetAllBook = async () => {
@@ -15,6 +30,11 @@ function BookPage() {
   }, []);
 
   const columns = [
+    {
+      key: 'id',
+      title: 'ID',
+      dataIndex: 'id',
+    },
     {
       key: 'id',
       title: '书籍名字',
@@ -45,6 +65,21 @@ function BookPage() {
       title: '书籍文件路径',
       dataIndex: 'bookFilePath',
     },
+    {
+      key: 'id',
+      title: '操作',
+      render: (record: Book) => (
+        <DownloadOutlined
+          // download="测试.txt"
+          onClick={async () => {
+            console.log('record: ', record);
+            const content = await doDownloadBook(record.id);
+            var blob = new Blob(['\ufeff' + content], { type: 'text/txt,charset=UTF-8' });
+            openDownloadDialog(blob, record.bookName + '.txt');
+          }}
+        />
+      ),
+    },
   ];
 
   return (
@@ -55,7 +90,6 @@ function BookPage() {
           padding: '5px 5px 200px 5px',
         }}
       >
-        <h4 className="text-center">所有书籍列表</h4>
         <Table columns={columns} dataSource={books} rowKey="id" />
       </div>
     </div>

@@ -40,7 +40,6 @@ function UserPage() {
   return (
     <div className="px-3" style={{ marginTop: '10px' }}>
       <div className="text-center">
-        <h4>所有用户列表</h4>
         <Table columns={columns} dataSource={users} rowKey="id" />
       </div>
     </div>
