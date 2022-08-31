@@ -52,7 +52,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "react-select": "^5.4.0",
-    "react-toastify": "6",
+    "react-toastify": "9",
     "react-toggle": "^4.1.1",
     "reactstrap": "^9.1.4",
     "styled-jsx": "^5.0.4",
