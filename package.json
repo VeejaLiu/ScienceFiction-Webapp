@@ -28,7 +28,7 @@
     "babel-eslint": "10.x",
     "bootstrap": "^5.2.0",
     "eslint": "^7.16.0",
-    "eslint-config-prettier": "^6.14.0",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-config-react-app": "^5.2.1",
     "eslint-plugin-flowtype": "4.x",
     "eslint-plugin-import": "2.x",
