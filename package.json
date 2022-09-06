@@ -21,7 +21,7 @@
     "@types/react-select": "^5.0.1",
     "@types/react-toggle": "^4.0.2",
     "@types/styled-jsx": "^3.4.4",
-    "@typescript-eslint/eslint-plugin": "^4.11.0",
+    "@typescript-eslint/eslint-plugin": "^5.36.2",
     "@typescript-eslint/parser": "^5.36.1",
     "antd": "^4.17.3",
     "axios": "^0.27.2",
