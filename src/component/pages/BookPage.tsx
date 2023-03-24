@@ -4,16 +4,24 @@ function BookPage() {
     const getBooks = () => {
         let i = 0;
         let books = [];
-        while (i < 10) {
+        while (i < 100) {
             books.push(
                 <tr key={i}>
                     <td>{i}</td>
-                    <td>JavaScript高级程序设计（第3版）</td>
-                    <td>作者：[美] Nicholas C. Zakas</td>
-                    <td>11千字</td>
+                    <td>
+                        <a href='/#'>
+                            Javascript Advanced Programming (3rd Edition)
+                        </a>
+                    </td>
+                    <td>
+                        <a href='/#'>
+                            [US] Nicholas C. Zakas
+                        </a>
+                    </td>
+                    <td>11k</td>
                     <td>
                         <a href="/book/#">
-                            下载
+                            download
                         </a>
                     </td>
                 </tr>
