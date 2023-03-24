@@ -15,7 +15,7 @@ function NavHeader() {
                         <Nav className="me-auto">
                             <Nav.Link href="/book">书籍</Nav.Link>
                             <Nav.Link href="/author">作者</Nav.Link>
-                            <Nav.Link href="/category">目录</Nav.Link>
+                            <Nav.Link href="/category">分类</Nav.Link>
                             <Nav.Link href="/file">文件</Nav.Link>
                             <NavDropdown title="用户" id="basic-nav-dropdown">
                                 <NavDropdown.Item href="/user/profile">

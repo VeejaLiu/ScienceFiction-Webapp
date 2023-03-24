@@ -1,9 +1,7 @@
-import {Table} from "react-bootstrap";
-
 function BookDetailPage() {
     return (
         <div>
-            <h1>所有书籍</h1>
+            <h1>书籍详细信息</h1>
         </div>
     );
 }

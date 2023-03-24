@@ -1,35 +1,20 @@
 import {Table} from "react-bootstrap";
+import {Book, BookApi} from "../../service/BookApi";
+import {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 
 function BookPage() {
-    const getBooks = () => {
-        let i = 0;
-        let books = [];
-        while (i < 100) {
-            books.push(
-                <tr key={i}>
-                    <td>{i}</td>
-                    <td>
-                        <a href='/#'>
-                            Javascript Advanced Programming (3rd Edition)
-                        </a>
-                    </td>
-                    <td>
-                        <a href='/#'>
-                            [US] Nicholas C. Zakas
-                        </a>
-                    </td>
-                    <td>11k</td>
-                    <td>
-                        <a href="/book/#">
-                            download
-                        </a>
-                    </td>
-                </tr>
-            );
-            i++;
-        }
-        return books;
-    };
+
+    // books useState, type is Book[]
+    const [books, setBooks] = useState<Book[]>([]);
+
+    useEffect(() => {
+        const getBooks = async () => {
+            const books = await BookApi.getAllBook();
+            setBooks(books);
+        };
+        getBooks();
+    }, []);
 
     return (
         <div>
@@ -41,12 +26,34 @@ function BookPage() {
                         <th>ID</th>
                         <th>书名</th>
                         <th>作者</th>
-                        <th>字数</th>
+                        <th>标签</th>
                         <th>文件</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {getBooks()}
+                    {
+                        books.map((book) => {
+                            return (<tr key={book.id}>
+                                <td>{book.id}</td>
+                                <td>
+                                    {/* go to book detail page */}
+                                    <Link to={`/book/${book.id}`}>
+                                        {book.bookName}
+                                    </Link>
+                                </td>
+                                <td>
+                                    <Link to={`/author/${book.bookAuthor}`}>
+                                        {book.bookAuthor}
+                                    </Link>
+                                </td>
+                                <td>
+                                    {book.bookTags}
+                                </td>
+                                <td>
+                                    {book.bookFilePath ? (<a href="/book/#">book.bookFilePath</a>) : '暂无文件'}
+                                </td>
+                            </tr>);
+                        })}
                     </tbody>
                 </Table>
             </div>
