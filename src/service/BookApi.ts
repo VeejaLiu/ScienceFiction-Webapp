@@ -19,6 +19,11 @@ create table book
 );
  */
 
+export interface GetAllBookResult {
+    books: Book[];
+    total: number;
+}
+
 export interface Book {
     id: number;
     bookName: string;
@@ -39,16 +44,19 @@ export class BookApi {
     /**
      * Get all books
      */
-    static async getAllBook(): Promise<Book[]> {
-        let books: Book[] = [];
+    static async getAllBook(paging: { limit: number; offset: number }): Promise<GetAllBookResult> {
+        let getAllBookResult: GetAllBookResult = {
+            books: [],
+            total: 0
+        };
         try {
-            const response = await axios.get(`${backendUrl}/books`);
+            const response = await axios.get(`${backendUrl}/books?limit=${paging.limit}&offset=${paging.offset}`);
             if (response.status === 200) {
-                books = response.data;
+                getAllBookResult = response.data;
             }
         } catch (e) {
             console.log(e);
         }
-        return books;
+        return getAllBookResult;
     }
 }
