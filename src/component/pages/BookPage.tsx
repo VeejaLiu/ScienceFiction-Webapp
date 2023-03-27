@@ -78,7 +78,7 @@ function BookPage() {
                 <Form.Label style={{width: '10rem'}} htmlFor="bookName">书名</Form.Label>
                 <Form.Control
                     onChange={(event)=>{
-                        console.log(event.target.value);
+                        setSearchName(event.target.value);
                     }}
                     style={{width: '10rem'}}
                     type="text"
