@@ -44,13 +44,13 @@ export class BookApi {
     /**
      * Get all books
      */
-    static async getAllBook(paging: { limit: number; offset: number }): Promise<GetAllBookResult> {
+    static async getAllBook(paging: { offset: number; limit: number; bookName: string }): Promise<GetAllBookResult> {
         let getAllBookResult: GetAllBookResult = {
             books: [],
             total: 0
         };
         try {
-            const response = await axios.get(`${backendUrl}/books?limit=${paging.limit}&offset=${paging.offset}`);
+            const response = await axios.get(`${backendUrl}/books?limit=${paging.limit}&offset=${paging.offset}&bookName=${paging.bookName}`);
             if (response.status === 200) {
                 getAllBookResult = response.data;
             }

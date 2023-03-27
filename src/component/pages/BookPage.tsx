@@ -10,6 +10,10 @@ function BookPage() {
     // books count
     const [booksCount, setBooksCount] = useState<number>(0);
 
+
+    // search book name
+    const [searchBookName, setSearchName] = useState<string>("");
+
     // number of books to display per page
     const [booksPerPage, setBooksPerPage] = useState<number>(20);
 
@@ -34,6 +38,7 @@ function BookPage() {
         }
         const getBooks = async () => {
             const getAllBookResult = await BookApi.getAllBook({
+                bookName: searchBookName,
                 offset: (currentPage - 1) * booksPerPage,
                 limit: booksPerPage
             });
@@ -53,7 +58,7 @@ function BookPage() {
         setPageNumbers([]);
         setCurrentPage(1);
         getBooks();
-    }, [booksPerPage]);
+    }, [booksPerPage, searchBookName]);
 
 
     useEffect(() => {
@@ -69,8 +74,22 @@ function BookPage() {
     return (
         <div>
             <div style={{margin: "1rem 2rem"}}>
-                <Form.Select aria-label="Default select example" onChange={(event) => {
-                    setBooksPerPage(parseInt(event.target.value))
+
+                <Form.Label style={{width: '10rem'}} htmlFor="bookName">书名</Form.Label>
+                <Form.Control
+                    onChange={(event)=>{
+                        console.log(event.target.value);
+                    }}
+                    style={{width: '10rem'}}
+                    type="text"
+                    id="bookName"
+                />
+                <Form.Text style={{width: '10rem'}} id="bookName" muted>
+                    book name
+                </Form.Text>
+
+                <Form.Select  style={{width: '10rem'}} aria-label="Default select example" onChange={(event) => {
+                    setBooksPerPage(parseInt(event.target.value) || 20)
                 }}>
                     <option defaultValue="20">选择每页数量</option>
                     <option value="5">每页数量: 5</option>
