@@ -73,22 +73,30 @@ function BookPage() {
 
     return (
         <div>
-            <div style={{margin: "1rem 2rem"}}>
+            {/* 搜索条件 */}
+            <div style={{
+                margin: "1rem 2rem",
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center"
+            }}>
+                <div style={{
+                    display: "flex",
+                    flexDirection: "row",
+                }}>
+                    <Form.Label style={{}} htmlFor="bookName"><b>书名: </b></Form.Label>
+                    <Form.Control
+                        onChange={(event: any) => {
+                            setSearchName(event.target.value);
+                        }}
+                        style={{width: '15rem'}}
+                        type="text"
+                        id="bookName"
+                    />
+                </div>
 
-                <Form.Label style={{width: '10rem'}} htmlFor="bookName">书名</Form.Label>
-                <Form.Control
-                    onChange={(event)=>{
-                        setSearchName(event.target.value);
-                    }}
-                    style={{width: '10rem'}}
-                    type="text"
-                    id="bookName"
-                />
-                <Form.Text style={{width: '10rem'}} id="bookName" muted>
-                    book name
-                </Form.Text>
-
-                <Form.Select  style={{width: '10rem'}} aria-label="Default select example" onChange={(event) => {
+                <Form.Select style={{width: '10rem'}} aria-label="Default select example" onChange={(event) => {
                     setBooksPerPage(parseInt(event.target.value) || 20)
                 }}>
                     <option defaultValue="20">选择每页数量</option>
