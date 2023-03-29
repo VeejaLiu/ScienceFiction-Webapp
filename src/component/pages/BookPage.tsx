@@ -24,52 +24,35 @@ function BookPage() {
     // create an array of page numbers to display in the pagination component
     const [pageNumbers, setPageNumbers] = useState<number[]>([]);
 
-
+    // get books
     const getBooks = async () => {
-        console.log("currentPage: " + currentPage);
-        console.log("pageCount: " + pageCount);
-        if (currentPage > pageCount && pageCount !== 0) {
-            setCurrentPage(pageCount);
-            return;
-        }
-        if (currentPage < 1) {
-            setCurrentPage(1);
-            return;
-        }
-        const getBooks = async () => {
-            const getAllBookResult = await BookApi.getAllBook({
-                bookName: searchBookName,
-                offset: (currentPage - 1) * booksPerPage,
-                limit: booksPerPage
-            });
-            await setBooks(getAllBookResult.books);
-            await setBooksCount(getAllBookResult.total);
-        };
-        await getBooks();
-    }
-
-    useEffect(() => {
-        console.log("currentPage: " + currentPage)
-        getBooks()
-    }, [currentPage]);
-
-    useEffect(() => {
-        console.log("booksPerPage: " + booksPerPage)
-        setPageNumbers([]);
-        setCurrentPage(1);
-        getBooks();
-    }, [booksPerPage, searchBookName]);
-
-
-    useEffect(() => {
-        setPageCount(Math.ceil(booksCount / booksPerPage));
+        const getAllBookResult = await BookApi.getAllBook({
+            bookName: searchBookName,
+            offset: (currentPage - 1) * booksPerPage,
+            limit: booksPerPage
+        });
+        console.log("getAllBookResult. books.length=" + getAllBookResult.books.length + " total=" + getAllBookResult.total);
+        await setBooks(getAllBookResult.books);
+        await setBooksCount(getAllBookResult.total);
+        console.log("booksCount changed! booksCount=" + booksCount)
+        const pageCount = Math.ceil(getAllBookResult.total / booksPerPage);
+        await setPageCount(pageCount);
         const pageNumbers: number[] = [];
-        for (let i = 1; i <= Math.ceil(booksCount / booksPerPage); i++) {
+        for (let i = 1; i <= Math.ceil(getAllBookResult.total / booksPerPage); i++) {
             pageNumbers.push(i);
         }
         setPageNumbers(pageNumbers);
+        console.log("pageNumbers=" + pageNumbers);
+        if (currentPage > pageCount) {
+            setCurrentPage(pageCount);
+        }
+    }
 
-    }, [books, booksCount]);
+    // change booksPerPage or currentPage, then get books
+    useEffect(() => {
+        console.log("booksPerPage or currentPage changed! booksPerPage=" + booksPerPage + " currentPage=" + currentPage);
+        getBooks();
+    }, [currentPage, booksPerPage]);
 
     return (
         <div>
@@ -96,15 +79,14 @@ function BookPage() {
                     />
                 </div>
 
-                <Button variant="primary">搜索</Button>
+                <Button variant="primary" onClick={getBooks}>搜索</Button>
 
                 <Form.Select style={{width: '10rem'}} aria-label="Default select example" onChange={(event) => {
                     setBooksPerPage(parseInt(event.target.value) || 20)
                 }}>
-                    <option defaultValue="20">选择每页数量</option>
                     <option value="5">每页数量: 5</option>
                     <option value="10">每页数量: 10</option>
-                    <option value="20">每页数量: 20</option>
+                    <option defaultValue="20">每页数量: 20</option>
                     <option value="50">每页数量: 50</option>
                     <option value="100">每页数量: 100</option>
                 </Form.Select>
@@ -159,62 +141,68 @@ function BookPage() {
                     </tbody>
                 </Table>
             </div>
-            {/* 分页组件 居中显示 */}
-            <div style={{margin: "auto 2rem"}}>
-                <Pagination size={undefined} bsPrefix="">
-                    {/* First page */}
-                    <Pagination.First onClick={() => {
-                        if (currentPage === 1)
-                            return;
-                        setCurrentPage(1)
-                    }}/>
+            {/* 所有书籍 End */}
 
-                    {/* Prev page */}
-                    <Pagination.Prev onClick={() => {
-                        if (currentPage === 1)
-                            return;
-                        setCurrentPage(currentPage - 1)
-                    }}/>
+            {(pageNumbers.length > 0) && (
+                <>
+                    {/* 分页组件 居中显示 */}
+                    <div style={{margin: "auto 2rem"}}>
+                        <Pagination size={undefined} bsPrefix="">
+                            {/* First page */}
+                            <Pagination.First onClick={() => {
+                                if (currentPage === 1)
+                                    return;
+                                setCurrentPage(1)
+                            }}/>
 
-                    {/* ... Page */}
-                    {
-                        (currentPage - 2 > 1) && (
-                            <>
-                                <Pagination.Ellipsis/>
-                            </>
-                        )
-                    }
+                            {/* Prev page */}
+                            <Pagination.Prev onClick={() => {
+                                if (currentPage === 1)
+                                    return;
+                                setCurrentPage(currentPage - 1)
+                            }}/>
 
-                    {/* Every Page */}
-                    {
-                        pageNumbers.map((pageNumber) => {
-                            if (Math.abs(pageNumber - currentPage) <= 2) {
-                                return (
-                                    <Pagination.Item key={pageNumber} active={pageNumber === currentPage}
-                                                     onClick={() => setCurrentPage(pageNumber)}>{pageNumber}</Pagination.Item>
-                                );
+                            {/* ... Page */}
+                            {
+                                (currentPage - 2 > 1) && (
+                                    <><Pagination.Ellipsis/></>
+                                )
                             }
-                        })
-                    }
 
-                    {/* ... Page */}
-                    {
-                        (currentPage + 2 < pageCount) ? (
-                            <>
-                                <Pagination.Ellipsis/>
-                            </>
-                        ) : null
-                    }
+                            {/* Every Page */}
+                            {
+                                pageNumbers.map((pageNumber) => {
+                                    if (Math.abs(pageNumber - currentPage) <= 2) {
+                                        return (
+                                            <Pagination.Item key={pageNumber}
+                                                             active={pageNumber === currentPage}
+                                                             onClick={() => setCurrentPage(pageNumber)}>
+                                                {pageNumber}
+                                            </Pagination.Item>
+                                        );
+                                    }
+                                })
+                            }
 
-                    {/* next page */}
-                    <Pagination.Next onClick={() => {
-                        if (currentPage >= pageCount)
-                            return;
-                        setCurrentPage(currentPage + 1)
-                    }}/>
-                    <Pagination.Last onClick={() => setCurrentPage(pageCount)}/>
-                </Pagination>
-            </div>
+                            {/* ... Page */}
+                            {
+                                (currentPage + 2 < pageCount) ? (
+                                    <><Pagination.Ellipsis/></>
+                                ) : null
+                            }
+
+                            {/* next page */}
+                            <Pagination.Next onClick={() => {
+                                if (currentPage >= pageCount)
+                                    return;
+                                setCurrentPage(currentPage + 1)
+                            }}/>
+                            <Pagination.Last onClick={() => setCurrentPage(pageCount)}/>
+                        </Pagination>
+                    </div>
+                    {/* 分页组件 End */}
+                </>
+            )}
         </div>
     );
 }
