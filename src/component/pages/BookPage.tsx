@@ -1,4 +1,4 @@
-import {Form, Pagination, Table} from "react-bootstrap";
+import {Button, Form, Pagination, Table} from "react-bootstrap";
 import {Book, BookApi} from "../../service/BookApi";
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
@@ -95,6 +95,8 @@ function BookPage() {
                         id="bookName"
                     />
                 </div>
+
+                <Button variant="primary">搜索</Button>
 
                 <Form.Select style={{width: '10rem'}} aria-label="Default select example" onChange={(event) => {
                     setBooksPerPage(parseInt(event.target.value) || 20)
