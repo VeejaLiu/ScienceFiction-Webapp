@@ -1,7 +1,8 @@
 import {Button, Form, Pagination, Table} from "react-bootstrap";
 import {Book, BookApi} from "../../service/BookApi";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
+import Tag from "../tag/Tag";
 
 function BookPage() {
 
@@ -63,6 +64,13 @@ function BookPage() {
         getBooks();
     }, [currentPage, booksPerPage]);
 
+    function getTags(bookTags: string) {
+        const tags = JSON.parse(bookTags);
+        return tags.map((tag: string) => {
+            return (<Tag key={tag} text={tag}/>);
+        });
+    }
+
     return (
         <div>
             {/* 搜索条件 */}
@@ -121,7 +129,12 @@ function BookPage() {
                 (!isSearch && books.length > 0) && (
                     <div style={{margin: "2rem"}}>
                         <h1>搜索到 {booksCount} 本书籍</h1>
-                        <Table striped bordered hover size="sm">
+                        <Table
+                            // striped
+                            bordered
+                            hover
+                            size="sm"
+                        >
                             <thead>
                             <tr>
                                 <th>ID</th>
@@ -159,19 +172,22 @@ function BookPage() {
                                             </Link>
                                         </td>
                                         <td>
-                                            {book.bookTags}
+                                            {
+                                                getTags(book.bookTags)
+                                            }
                                         </td>
                                         <td>
                                             {book.bookFilePath ? (<a href="/book/#">book.bookFilePath</a>) : '暂无文件'}
                                         </td>
-                                        {/*<td>{new Date(book.createDate).toLocaleString()}</td>*/}
-                                        {/*<td>{new Date(book.updateDate).toLocaleString()}</td>*/}
-                                    </tr>);
+                                        {/*<td>{new Date(book.createDate).toLocaleString()}</td>*/
+                                        }
+                                        {/*<td>{new Date(book.updateDate).toLocaleString()}</td>*/
+                                        }
+                                    </tr>)
+                                        ;
                                 })}
                             </tbody>
                         </Table>
-
-
                     </div>
                 )
             }
