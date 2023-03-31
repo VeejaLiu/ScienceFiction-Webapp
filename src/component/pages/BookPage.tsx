@@ -127,28 +127,36 @@ function BookPage() {
                                 <th>ID</th>
                                 <th>书名</th>
                                 <th>作者</th>
+                                <th>分类</th>
                                 <th>标签</th>
                                 <th>文件</th>
-                                <th>创建时间</th>
-                                <th>更新时间</th>
+                                {/*<th>创建时间</th>*/}
+                                {/*<th>更新时间</th>*/}
                             </tr>
                             </thead>
                             <tbody>
                             {
                                 books.map((book) => {
-                                    return (<tr key={book.id}>
-                                        <td>{book.id}</td>
+                                    return (<tr key={book.bookID}>
+                                        <td>{book.bookID}</td>
                                         <td>
                                             {/* go to book detail page */}
-                                            <Link to={`/book/${book.id}`}>
+                                            <Link to={`/book/${book.bookID}`}>
                                                 {book.bookName}
                                             </Link>
                                         </td>
                                         <td>
+                                            {/* go to author detail page */}
                                             <Link to={`/author/${book.bookAuthor}`}>
                                                 {book.bookAuthor}
                                             </Link>
 
+                                        </td>
+                                        <td>
+                                            {/* go to category detail page */}
+                                            <Link to={`/category/${book.bookCategory}`}>
+                                                {book.bookCategory}
+                                            </Link>
                                         </td>
                                         <td>
                                             {book.bookTags}
@@ -156,12 +164,8 @@ function BookPage() {
                                         <td>
                                             {book.bookFilePath ? (<a href="/book/#">book.bookFilePath</a>) : '暂无文件'}
                                         </td>
-                                        <td>
-                                            {new Date(book.createDate).toLocaleString()}
-                                        </td>
-                                        <td>
-                                            {new Date(book.updateDate).toLocaleString()}
-                                        </td>
+                                        {/*<td>{new Date(book.createDate).toLocaleString()}</td>*/}
+                                        {/*<td>{new Date(book.updateDate).toLocaleString()}</td>*/}
                                     </tr>);
                                 })}
                             </tbody>

@@ -25,7 +25,7 @@ export interface GetAllBookResult {
 }
 
 export interface Book {
-    id: number;
+    bookID: number;
     bookName: string;
     bookAuthor: number;
     bookCategory: number;
