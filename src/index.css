@@ -1,0 +1,13 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #333333;
+    background-color: #f7f7f7;
+}
+
+/* all hyper link color */
+a {
+    color: #333333;
+    /*text-decoration: none;*/
+}
