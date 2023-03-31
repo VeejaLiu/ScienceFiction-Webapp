@@ -9,5 +9,6 @@
 /* all hyper link color */
 a {
     color: #333333;
+    background-color: unset;
     /*text-decoration: none;*/
 }
