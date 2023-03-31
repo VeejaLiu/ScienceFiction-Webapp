@@ -213,6 +213,8 @@ function BookPage() {
                                                 {pageNumber}
                                             </Pagination.Item>
                                         );
+                                    } else {
+                                        return null;
                                     }
                                 })
                             }
