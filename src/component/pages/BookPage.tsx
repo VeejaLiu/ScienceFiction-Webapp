@@ -98,12 +98,17 @@ function BookPage() {
 
                 <Button variant="success" onClick={getBooks}>搜索</Button>
 
-                <Form.Select style={{width: '10rem'}} aria-label="Default select example" onChange={(event) => {
-                    setBooksPerPage(parseInt(event.target.value) || 20)
-                }}>
+                <Form.Select
+                    style={{width: '10rem'}}
+                    aria-label="Default select example"
+                    onChange={(event) => {
+                        setBooksPerPage(parseInt(event.target.value) || 20)
+                    }}
+                    value={20}
+                >
                     <option value="5">每页数量: 5</option>
                     <option value="10">每页数量: 10</option>
-                    <option defaultValue="20">每页数量: 20</option>
+                    <option value="20">每页数量: 20</option>
                     <option value="50">每页数量: 50</option>
                     <option value="100">每页数量: 100</option>
                 </Form.Select>
