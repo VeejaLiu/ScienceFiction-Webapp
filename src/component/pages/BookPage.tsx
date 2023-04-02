@@ -11,7 +11,7 @@ function BookPage() {
     // books count
     const [booksCount, setBooksCount] = useState<number>(0);
 
-
+    // is search state
     const [isSearch, setIsSearch] = useState<boolean>(false);
     // search book name
     const [searchBookName, setSearchName] = useState<string>("");
@@ -47,7 +47,7 @@ function BookPage() {
         const pageCount = Math.ceil(getAllBookResult.total / booksPerPage);
         await setPageCount(pageCount);
         const pageNumbers: number[] = [];
-        for (let i = 1; i <= Math.ceil(getAllBookResult.total / booksPerPage); i++) {
+        for (let i = 1; i <= pageCount; i++) {
             pageNumbers.push(i);
         }
         await setPageNumbers(pageNumbers);
@@ -108,7 +108,7 @@ function BookPage() {
                     onChange={(event) => {
                         setBooksPerPage(parseInt(event.target.value) || 20)
                     }}
-                    value={20}
+                    value={booksPerPage}
                 >
                     <option value="5">每页数量: 5</option>
                     <option value="10">每页数量: 10</option>
@@ -141,7 +141,7 @@ function BookPage() {
                         <Table
                             // striped
                             bordered
-                            hover
+                            // hover
                             size="sm"
                         >
                             <thead>
@@ -197,7 +197,8 @@ function BookPage() {
                 )
             }
 
-            {(pageNumbers.length > 0 && !isSearch) && (
+            {/* 分页组件 */}
+            {(pageNumbers.length > 1 && !isSearch) && (
                 <>
                     {/* 分页组件 居中显示 */}
                     <div style={{margin: "auto 2rem"}}>

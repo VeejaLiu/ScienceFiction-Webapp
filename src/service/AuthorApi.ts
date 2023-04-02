@@ -16,6 +16,11 @@ create table author
 );
  */
 
+export interface GetAllAuthorResult {
+    authors: Author[];
+    total: number;
+}
+
 export interface Author {
     id: number;
     authorFirstName: string;
@@ -31,19 +36,26 @@ export interface Author {
  */
 export class AuthorApi {
 
-        /**
-        * Get all authors
-        */
-        static async getAllAuthor(): Promise<Author[]> {
-            let authors: Author[] = [];
-            try {
-                const response = await axios.get(`${backendUrl}/authors`);
-                if (response.status === 200) {
-                    authors = response.data;
-                }
-            } catch (e) {
-                console.log(e);
+    /**
+     * Get all authors
+     */
+    static async getAllAuthor(params: {
+        keyword: string;
+        offset: number;
+        limit: number;
+    }): Promise<GetAllAuthorResult> {
+        let authors: GetAllAuthorResult = {
+            authors: [],
+            total: 0
+        };
+        try {
+            const response = await axios.get(`${backendUrl}/authors?keyword=${params.keyword}&offset=${params.offset}&limit=${params.limit}`);
+            if (response.status === 200) {
+                authors = response.data;
             }
-            return authors;
+        } catch (e) {
+            console.log(e);
         }
+        return authors;
+    }
 }
