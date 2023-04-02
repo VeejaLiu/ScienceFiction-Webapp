@@ -81,6 +81,8 @@ function BookPage() {
                 justifyContent: "space-between",
                 alignItems: "center"
             }}>
+
+                {/* 按照书名搜索 */}
                 <div style={{
                     display: "flex",
                     flexDirection: "row",
@@ -96,8 +98,10 @@ function BookPage() {
                     />
                 </div>
 
+                {/* 搜索按钮 */}
                 <Button variant="success" onClick={getBooks}>搜索</Button>
 
+                {/* 每页数量选项 */}
                 <Form.Select
                     style={{width: '10rem'}}
                     aria-label="Default select example"
@@ -184,10 +188,6 @@ function BookPage() {
                                         <td>
                                             {book.bookFilePath ? (<a href="/book/#">book.bookFilePath</a>) : '暂无文件'}
                                         </td>
-                                        {/*<td>{new Date(book.createDate).toLocaleString()}</td>*/
-                                        }
-                                        {/*<td>{new Date(book.updateDate).toLocaleString()}</td>*/
-                                        }
                                     </tr>)
                                         ;
                                 })}
