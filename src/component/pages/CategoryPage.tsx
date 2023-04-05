@@ -74,12 +74,12 @@ function CategoryPage() {
                 alignItems: "center"
             }}>
 
-                {/* 按照目录搜索 */}
+                {/* 按照分类搜索 */}
                 <div style={{
                     display: "flex",
                     flexDirection: "row",
                 }}>
-                    <Form.Label style={{}} htmlFor="bookName"><b>目录: </b></Form.Label>
+                    <Form.Label style={{}} htmlFor="bookName"><b>分类: </b></Form.Label>
                     <Form.Control
                         onChange={(event: any) => {
                             setKeyword(event.target.value);
