@@ -10,6 +10,8 @@ import FilePage from "./component/pages/FilePage";
 import UserProfilePage from "./component/user/UserProfilePage";
 import BookDetailPage from "./component/pages/BookDetailPage";
 import AuthorDetailPage from "./component/pages/AuthorDetailPage";
+import LoginPage from "./component/user/LoginPage";
+import RegisterPage from "./component/user/RegisterPage";
 
 
 function App() {
@@ -35,6 +37,8 @@ function App() {
                 <Route path='/file' element={<FilePage/>}/>
 
                 {/* 用户路径 */}
+                <Route path='/user/login' element={<LoginPage/>}/>
+                <Route path='/user/register' element={<RegisterPage/>}/>
                 <Route path='/user/profile' element={<UserProfilePage/>}/>
                 <Route path='/user/myUpload' element={<UserProfilePage/>}/>
                 <Route path='/user/myFavorite' element={<UserProfilePage/>}/>

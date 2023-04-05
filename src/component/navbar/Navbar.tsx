@@ -18,6 +18,12 @@ function NavHeader() {
                             <Nav.Link href="/category">分类</Nav.Link>
                             {/*<Nav.Link href="/file">文件</Nav.Link>*/}
                             <NavDropdown title="用户" id="basic-nav-dropdown">
+                                <NavDropdown.Item href="/user/login">
+                                    登录
+                                </NavDropdown.Item>
+                                <NavDropdown.Item href="/user/register">
+                                    注册
+                                </NavDropdown.Item>
                                 <NavDropdown.Item href="/user/profile">
                                     个人中心
                                 </NavDropdown.Item>
