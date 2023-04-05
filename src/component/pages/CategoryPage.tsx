@@ -88,10 +88,12 @@ function CategoryPage() {
                         type="text"
                         id="bookName"
                     />
+                    {/* 搜索按钮 */}
+                    <Button style={{
+                        width: '6rem'
+                    }} variant="success" onClick={getCategories}>搜索</Button>
                 </div>
 
-                {/* 搜索按钮 */}
-                <Button variant="success" onClick={getCategories}>搜索</Button>
 
                 {/* 每页数量选项 */}
                 <Form.Select

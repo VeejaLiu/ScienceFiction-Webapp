@@ -84,10 +84,16 @@ function BookPage() {
 
                 {/* 按照书名搜索 */}
                 <div style={{
+                    // backgroundColor: "#111",
+                    // height: '3rem',
                     display: "flex",
                     flexDirection: "row",
                 }}>
-                    <Form.Label style={{}} htmlFor="bookName"><b>书名: </b></Form.Label>
+                    {/*垂直居中显示*/}
+                    <Form.Label style={{
+                        // 垂直居中显示
+                        alignItems: "center",
+                    }} htmlFor="bookName"><b>书名: </b></Form.Label>
                     <Form.Control
                         onChange={(event: any) => {
                             setSearchName(event.target.value);
@@ -96,10 +102,12 @@ function BookPage() {
                         type="text"
                         id="bookName"
                     />
+                    {/* 搜索按钮 */}
+                    <Button style={{
+                        width: '6rem'
+                    }} variant="success" onClick={getBooks}>搜索</Button>
                 </div>
 
-                {/* 搜索按钮 */}
-                <Button variant="success" onClick={getBooks}>搜索</Button>
 
                 {/* 每页数量选项 */}
                 <Form.Select
