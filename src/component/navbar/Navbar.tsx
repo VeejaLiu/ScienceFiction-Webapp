@@ -3,8 +3,17 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import {Button, Form} from "react-bootstrap";
+import {clearUser} from "../../service/UserApi";
 
 function NavHeader() {
+
+    const userId = localStorage.getItem("science_fiction_webapp_userId");
+    const email = localStorage.getItem("science_fiction_webapp_email");
+    const nickname = localStorage.getItem("science_fiction_webapp_nickname");
+    const token = localStorage.getItem("science_fiction_webapp_token");
+
+    const isLogin = userId && email && nickname && token;
+
     return (
         <div>
             <Navbar bg="light" expand="lg">
@@ -17,32 +26,45 @@ function NavHeader() {
                             <Nav.Link href="/author">作者</Nav.Link>
                             <Nav.Link href="/category">分类</Nav.Link>
                             {/*<Nav.Link href="/file">文件</Nav.Link>*/}
-                            <NavDropdown title="用户" id="basic-nav-dropdown">
-                                <NavDropdown.Item href="/user/login">
-                                    登录
-                                </NavDropdown.Item>
-                                <NavDropdown.Item href="/user/register">
-                                    注册
-                                </NavDropdown.Item>
-                                <NavDropdown.Item href="/user/profile">
-                                    个人中心
-                                </NavDropdown.Item>
-                                {/*<NavDropdown.Item href="/user/myUpload">*/}
-                                {/*    我的资源*/}
-                                {/*</NavDropdown.Item>*/}
-                                {/*<NavDropdown.Item href="/user/myFavorite">*/}
-                                {/*    我的收藏*/}
-                                {/*</NavDropdown.Item>*/}
-                                {/*<NavDropdown.Item href="/user/message">*/}
-                                {/*    消息中心*/}
-                                {/*</NavDropdown.Item>*/}
-                                {/*<NavDropdown.Item href="/user/reward">*/}
-                                {/*    签到抽奖*/}
-                                {/*</NavDropdown.Item>*/}
-                                <NavDropdown.Divider/>
-                                <NavDropdown.Item href="/user/logout">
-                                    登出
-                                </NavDropdown.Item>
+                            <NavDropdown title={(isLogin ? `${nickname}` : '用户')} id="basic-nav-dropdown">
+                                {
+                                    isLogin ?
+                                        (
+                                            <>
+                                                <NavDropdown.Item href="/user/profile">
+                                                    个人中心
+                                                </NavDropdown.Item>
+                                                {/*<NavDropdown.Item href="/user/myUpload">*/}
+                                                {/*    我的资源*/}
+                                                {/*</NavDropdown.Item>*/}
+                                                <NavDropdown.Item href="/user/myFavorite">
+                                                    我的收藏
+                                                </NavDropdown.Item>
+                                                {/*<NavDropdown.Item href="/user/message">*/}
+                                                {/*    消息中心*/}
+                                                {/*</NavDropdown.Item>*/}
+                                                {/*<NavDropdown.Item href="/user/reward">*/}
+                                                {/*    签到抽奖*/}
+                                                {/*</NavDropdown.Item>*/}
+                                                <NavDropdown.Divider/>
+                                                <NavDropdown.Item onClick={() => {
+                                                    clearUser();
+                                                    window.location.href = "/";
+                                                }}>
+                                                    登出
+                                                </NavDropdown.Item>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <NavDropdown.Item href="/user/login">
+                                                    登录
+                                                </NavDropdown.Item>
+                                                <NavDropdown.Item href="/user/register">
+                                                    注册
+                                                </NavDropdown.Item>
+                                            </>
+                                        )
+                                }
                             </NavDropdown>
                         </Nav>
                         <Form className="d-flex">

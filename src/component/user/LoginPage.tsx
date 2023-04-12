@@ -3,11 +3,17 @@ import {Button, Form} from "react-bootstrap";
 import {UserApi} from "../../service/UserApi";
 
 function LoginPage() {
+
+    // email
+    const [email, setEmail] = React.useState('');
+    // password
+    const [password, setPassword] = React.useState('');
+
     function login() {
-        console.log('login');
+        console.log('LoginPage.login()...');
         UserApi.login({
-            email: '',
-            password: '',
+            email: email,
+            password: password,
         })
     }
 
@@ -28,6 +34,7 @@ function LoginPage() {
                 margin: '0 auto',
                 // 内边距
                 padding: '1rem',
+                // 水平居中
                 justifyContent: 'center',
                 // 宽度：自适应内容
                 width: '25rem',
@@ -39,7 +46,11 @@ function LoginPage() {
                 <Form>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>邮箱地址</Form.Label>
-                        <Form.Control type="email" placeholder="输入邮箱"/>
+                        <Form.Control type="text" placeholder="输入邮箱" onChange={
+                            (event) => {
+                                setEmail(event.target.value);
+                            }
+                        }/>
                         <Form.Text className="text-muted">
                             我们永远不会与任何人分享您的电子邮件。
                         </Form.Text>
@@ -47,12 +58,19 @@ function LoginPage() {
 
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Label>密码</Form.Label>
-                        <Form.Control type="password" placeholder="密码"/>
+                        <Form.Control type="password" placeholder="密码" onChange={
+                            (event) => {
+                                setPassword(event.target.value);
+                            }
+                        }/>
+
                     </Form.Group>
                     {/*<Form.Group className="mb-3" controlId="formBasicCheckbox">*/}
                     {/*    <Form.Check type="checkbox" label="Check me out"/>*/}
                     {/*</Form.Group>*/}
-                    <Button variant="primary" onClick={login}>
+                    <Button variant="primary" onClick={() => {
+                        login();
+                    }}>
                         登录
                     </Button>
 
